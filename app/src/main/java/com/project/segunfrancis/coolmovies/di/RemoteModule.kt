@@ -1,8 +1,5 @@
 package com.project.segunfrancis.coolmovies.di
 
-import android.content.Context
-import com.bumptech.glide.Glide
-import com.bumptech.glide.RequestManager
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.project.segunfrancis.coolmovies.BuildConfig
@@ -13,7 +10,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
-import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -42,9 +38,7 @@ object RemoteModule {
         return GsonBuilder().setLenient().create()
     }
 
-    @Provides
-    @Singleton
-    fun provideOkHttpClient(): OkHttpClient {
+    private fun provideOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
             .readTimeout(TIMEOUT, TimeUnit.SECONDS)
             .callTimeout(TIMEOUT, TimeUnit.SECONDS)
@@ -52,11 +46,9 @@ object RemoteModule {
             .build()
     }
 
-    @Provides
-    @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+    private fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .client(okHttpClient)
+            .client(provideOkHttpClient())
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(provideGson()))
             .build()
@@ -64,8 +56,8 @@ object RemoteModule {
 
     @Provides
     @Singleton
-    fun provideMovieApi(retrofit: Retrofit): MovieApi {
-        return retrofit.create(MovieApi::class.java)
+    fun provideMovieApi(): MovieApi {
+        return provideRetrofit().create(MovieApi::class.java)
     }
 
     @Provides

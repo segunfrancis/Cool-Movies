@@ -98,9 +98,6 @@ dependencies {
     // Timber
     implementation "com.jakewharton.timber:timber:$timber_version"
 
-    // IG Refresh layout
-    implementation "com.github.Jamshid-M:IGRefreshLayout:$refresh_layout_version"
-
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
