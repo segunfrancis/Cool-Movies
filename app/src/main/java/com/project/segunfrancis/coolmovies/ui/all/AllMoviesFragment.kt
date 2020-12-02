@@ -5,20 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import com.project.segunfrancis.coolmovies.databinding.AllMoviesFragmentBinding
+import com.project.segunfrancis.coolmovies.ui.all.adapter.MovieAdapter
+import com.project.segunfrancis.coolmovies.ui.all.adapter.MovieLoadStateAdapter
+import com.project.segunfrancis.coolmovies.util.loadingIndicator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import timber.log.Timber
 
 @AndroidEntryPoint
 class AllMoviesFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = AllMoviesFragment()
-    }
 
     private var _binding: AllMoviesFragmentBinding? = null
     private val binding get() = _binding!!
@@ -29,6 +29,7 @@ class AllMoviesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = AllMoviesFragmentBinding.inflate(layoutInflater)
+        binding.loadingIndicator.setImageDrawable(loadingIndicator(requireContext()))
         return binding.root
     }
 
@@ -36,15 +37,31 @@ class AllMoviesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val movieAdapter = MovieAdapter()
+        binding.retryButton.setOnClickListener { movieAdapter.retry() }
         binding.movieRecyclerView.apply {
-            adapter = movieAdapter
+            adapter = movieAdapter.withLoadStateFooter(
+                footer = MovieLoadStateAdapter { movieAdapter.retry() }
+            )
             layoutManager = GridLayoutManager(requireContext(), 2)
+        }
+        movieAdapter.addLoadStateListener { loadState ->
+            binding.movieRecyclerView.isVisible = loadState.source.refresh is LoadState.NotLoading
+            binding.loadingIndicator.isVisible = loadState.source.refresh is LoadState.Loading
+            binding.errorText.isVisible = loadState.source.refresh is LoadState.Error
+            binding.retryButton.isVisible = loadState.source.refresh is LoadState.Error
+
+            val errorState =
+                loadState.source.append as? LoadState.Error ?: loadState.append as? LoadState.Error
+                ?: loadState.source.refresh as? LoadState.Error
+                ?: loadState.refresh as? LoadState.Error
+            errorState?.let {
+                binding.errorText.text = it.error.localizedMessage
+            }
         }
 
         lifecycleScope.launchWhenStarted {
             viewModel.getTopRatedMovies().collectLatest {
                 movieAdapter.submitData(it)
-                Timber.d(it.toString())
             }
         }
     }

@@ -2,6 +2,7 @@ package com.project.segunfrancis.coolmovies.di
 
 import android.content.Context
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.project.segunfrancis.coolmovies.BuildConfig
@@ -65,12 +66,6 @@ object RemoteModule {
     @Singleton
     fun provideMovieApi(retrofit: Retrofit): MovieApi {
         return retrofit.create(MovieApi::class.java)
-    }
-
-    @Provides
-    @Singleton
-    fun provideGlide(@ApplicationContext context: Context): Glide {
-        return Glide.get(context)
     }
 
     @Provides

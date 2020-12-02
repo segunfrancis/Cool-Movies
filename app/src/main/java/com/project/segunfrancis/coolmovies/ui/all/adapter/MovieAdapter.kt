@@ -1,10 +1,9 @@
-package com.project.segunfrancis.coolmovies.ui.all
+package com.project.segunfrancis.coolmovies.ui.all.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
 import com.project.segunfrancis.coolmovies.R
 import com.project.segunfrancis.coolmovies.data.remote.model.Result
 import com.project.segunfrancis.coolmovies.databinding.ItemMovieListBinding
@@ -13,7 +12,7 @@ import com.project.segunfrancis.coolmovies.databinding.ItemMovieListBinding
  * Created by SegunFrancis
  */
 
-class MovieAdapter : PagingDataAdapter<Result, MovieAdapter.MovieViewHolder>(MovieDiffUtil) {
+class MovieAdapter : PagingDataAdapter<Result, MovieViewHolder>(MovieDiffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movie_list, parent, false)
@@ -21,18 +20,8 @@ class MovieAdapter : PagingDataAdapter<Result, MovieAdapter.MovieViewHolder>(Mov
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.bind()
+        holder.bind(getItem(position))
     }
-
-
-    class MovieViewHolder(private val binding: ItemMovieListBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-        fun bind() {
-
-        }
-    }
-
 
     companion object MovieDiffUtil : DiffUtil.ItemCallback<Result>() {
 
