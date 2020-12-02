@@ -15,7 +15,7 @@ fun ImageView.loadImage(url: String?) {
     Glide.with(this)
         .load(url)
         .placeholder(loadingIndicator(this.context))
-        .error(R.drawable.ic_smile)
+        .error(R.drawable.ic_error)
         .into(this)
 }
 

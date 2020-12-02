@@ -24,7 +24,6 @@ buildscript {
         legacy_support_version = "1.0.0"
         activity_version = "1.2.0-beta01"
         hilt_version = "2.28-alpha"
-        refresh_layout_version = "1.0.3"
     }
     repositories {
         google()

@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Cool Movies</string>
     <string name="retry">Retry</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="desc_loading_indicator">Loading indicator image</string>
 </resources>
