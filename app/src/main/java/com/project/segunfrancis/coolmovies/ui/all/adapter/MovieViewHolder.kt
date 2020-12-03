@@ -10,11 +10,17 @@ import com.project.segunfrancis.coolmovies.util.loadImage
  * Created by SegunFrancis
  */
 
-class MovieViewHolder(private val binding: ItemMovieListBinding) :
+class MovieViewHolder(
+    private val binding: ItemMovieListBinding,
+    private val onClick: (result: Result?) -> Unit
+) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(result: Result?) = with(binding) {
         movieTitle.text = result?.title
-        movieThumbnail.loadImage(AppConstants.IMAGE_BASE_URL.plus(AppConstants.POSTER_SIZE).plus(result?.poster_path))
+        movieThumbnail.loadImage(
+            AppConstants.IMAGE_BASE_URL.plus(AppConstants.POSTER_SIZE).plus(result?.poster_path)
+        )
+        root.setOnClickListener { onClick(result) }
     }
 }

@@ -1,7 +1,11 @@
 <resources>
     <string name="app_name">Cool Movies</string>
     <string name="retry">Retry</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="desc_loading_indicator">Loading indicator image</string>
+    <string name="text_plot_placeholder">Nullam tincidunt adipiscing enim. Etiam feugiat lorem non metus. In consectetuer turpis ut velit. Maecenas malesuada. Aliquam lobortis.</string>
+    <string name="desc_poster_image">poster image</string>
+    <string name="text_title">Title:</string>
+    <string name="text_plot">Plot:</string>
+    <string name="text_release_date">Release Date:</string>
+    <string name="text_vote_average">Vote Average:</string>
 </resources>

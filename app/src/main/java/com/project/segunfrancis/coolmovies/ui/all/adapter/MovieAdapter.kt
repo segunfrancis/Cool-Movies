@@ -12,11 +12,13 @@ import com.project.segunfrancis.coolmovies.databinding.ItemMovieListBinding
  * Created by SegunFrancis
  */
 
-class MovieAdapter : PagingDataAdapter<Result, MovieViewHolder>(MovieDiffUtil) {
+class MovieAdapter(private val onClick: (result: Result?) -> Unit) :
+    PagingDataAdapter<Result, MovieViewHolder>(MovieDiffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movie_list, parent, false)
-        return MovieViewHolder(ItemMovieListBinding.bind(view))
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_movie_list, parent, false)
+        return MovieViewHolder(ItemMovieListBinding.bind(view), onClick)
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
