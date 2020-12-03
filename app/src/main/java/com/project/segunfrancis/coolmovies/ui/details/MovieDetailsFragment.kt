@@ -1,5 +1,6 @@
 package com.project.segunfrancis.coolmovies.ui.details
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ import com.project.segunfrancis.coolmovies.util.AppConstants.IMAGE_BASE_URL
 import com.project.segunfrancis.coolmovies.util.loadImage
 import com.project.segunfrancis.coolmovies.util.snack
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MovieDetailsFragment : Fragment() {
@@ -24,18 +26,26 @@ class MovieDetailsFragment : Fragment() {
     private val binding get() = _binding!!
     private val args: MovieDetailsFragmentArgs by navArgs()
     private val viewModel: FavoriteViewModel by viewModels()
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentMovieDetailsBinding.inflate(layoutInflater)
+
+        // Setting the state of the Like button
+        binding.likeButton.isLiked =
+            sharedPreferences.getBoolean(args.movieDetails.id.toString(), false)
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val editor = sharedPreferences.edit()
         val result = args.movieDetails
         with(binding) {
             posterImage.loadImage(IMAGE_BASE_URL.plus(BACKDROP_SIZE).plus(result.backdrop_path))
@@ -46,10 +56,14 @@ class MovieDetailsFragment : Fragment() {
             likeButton.setOnLikeListener(object : OnLikeListener {
                 override fun liked(likeButton: LikeButton?) {
                     viewModel.addFavorite(result)
+                    editor.putBoolean(result.id.toString(), true)
+                    editor.apply()
                 }
 
                 override fun unLiked(likeButton: LikeButton?) {
                     viewModel.removeFavorite(result.id)
+                    editor.putBoolean(result.id.toString(), false)
+                    editor.apply()
                 }
             })
         }

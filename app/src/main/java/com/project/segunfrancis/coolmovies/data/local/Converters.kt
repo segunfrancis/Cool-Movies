@@ -1,8 +1,6 @@
 package com.project.segunfrancis.coolmovies.data.local
 
 import androidx.room.TypeConverter
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 
 /**
  * Created by SegunFrancis

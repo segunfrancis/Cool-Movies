@@ -17,18 +17,31 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/item_movie_list" />
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/no_connection_animation"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toTopOf="@id/error_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="no_connection.json"
+        app:lottie_loop="true" />
+
     <TextView
         android:id="@+id/error_text"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@id/retry_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintTop_toBottomOf="@id/no_connection_animation"
         tools:text="Unable to resolve host. No address associated with host name" />
 
     <com.google.android.material.button.MaterialButton
