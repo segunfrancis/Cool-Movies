@@ -11,4 +11,6 @@ object AppConstants {
     const val BACKDROP_SIZE: String = "w400/"
     const val NETWORK_PAGE_SIZE = 20
     const val TIMEOUT = 20L
+    const val DATABASE_NAME = "com.project.segunfrancis.coolmovies_database"
+    const val SHARED_PREF_NAME = "com.project.segunfrancis.coolmovies_shared_preference"
 }

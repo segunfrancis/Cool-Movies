@@ -54,6 +54,7 @@ class AllMoviesFragment : Fragment() {
             binding.loadingIndicator.isVisible = loadState.source.refresh is LoadState.Loading
             binding.errorText.isVisible = loadState.source.refresh is LoadState.Error
             binding.retryButton.isVisible = loadState.source.refresh is LoadState.Error
+            binding.noConnectionAnimation.isVisible = loadState.source.refresh is LoadState.Error
 
             val errorState =
                 loadState.source.append as? LoadState.Error ?: loadState.append as? LoadState.Error

@@ -102,6 +102,12 @@ dependencies {
     // Like Button
     implementation "com.github.jd-alexander:LikeButton:0.2.3"
 
+    // Progress view
+    implementation "com.github.skydoves:progressview:1.0.9"
+
+    // Lottie animation
+    implementation "com.airbnb.android:lottie:3.4.1"
+
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

@@ -1,7 +1,7 @@
 package com.project.segunfrancis.coolmovies.repository
 
 import androidx.paging.PagingData
-import com.project.segunfrancis.coolmovies.data.remote.model.Result
+import com.project.segunfrancis.coolmovies.data.model.Result
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -11,4 +11,10 @@ import kotlinx.coroutines.flow.Flow
 interface MovieRepository {
 
     fun getTopRatedMovies(apiKey: String): Flow<PagingData<Result>>
+
+    fun addFavorite(result: Result): Flow<Unit>
+
+    fun removeFavorite(id: Int): Flow<Unit>
+
+    fun getAllFavorites(): Flow<List<Result>>
 }
