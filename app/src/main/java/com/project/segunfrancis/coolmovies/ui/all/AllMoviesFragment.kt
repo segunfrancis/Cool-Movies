@@ -18,6 +18,7 @@ import com.project.segunfrancis.coolmovies.ui.home.HomeFragmentDirections
 import com.project.segunfrancis.coolmovies.util.loadingIndicator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AllMoviesFragment : Fragment() {
@@ -65,7 +66,7 @@ class AllMoviesFragment : Fragment() {
             }
         }
 
-        lifecycleScope.launchWhenStarted {
+        lifecycleScope.launch {
             viewModel.getTopRatedMovies().collectLatest {
                 movieAdapter.submitData(it)
             }

@@ -8,4 +8,5 @@
     <color name="custom_green">#26CD98</color>
     <color name="custom_red">#E42838</color>
     <color name="custom_yellow">#BBCC24</color>
+    <color name="pictureTitleBackgroundColor">#DDFFFFFF</color>
 </resources>
