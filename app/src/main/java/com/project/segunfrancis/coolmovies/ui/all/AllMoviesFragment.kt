@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import com.project.segunfrancis.coolmovies.databinding.AllMoviesFragmentBinding
 import com.project.segunfrancis.coolmovies.ui.all.adapter.MovieAdapter
 import com.project.segunfrancis.coolmovies.ui.all.adapter.MovieLoadStateAdapter
+import com.project.segunfrancis.coolmovies.ui.home.HomeFragmentDirections
 import com.project.segunfrancis.coolmovies.util.loadingIndicator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -36,7 +38,10 @@ class AllMoviesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val movieAdapter = MovieAdapter()
+        val movieAdapter = MovieAdapter { result ->
+            val directions = HomeFragmentDirections.actionHomeFragmentToMovieDetailsFragment(result!!)
+            requireParentFragment().findNavController().navigate(directions)
+        }
         binding.retryButton.setOnClickListener { movieAdapter.retry() }
         binding.movieRecyclerView.apply {
             adapter = movieAdapter.withLoadStateFooter(

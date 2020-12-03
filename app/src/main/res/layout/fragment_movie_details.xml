@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.details.MovieDetailsFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/poster_image"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:contentDescription="@string/desc_poster_image"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <com.like.LikeButton
+            android:id="@+id/like_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="16dp"
+            app:icon_size="48dp"
+            app:icon_type="heart"
+            app:layout_constraintBottom_toBottomOf="@id/poster_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/poster_image"
+            app:like_drawable="@drawable/ic_favorite"
+            app:unlike_drawable="@drawable/ic_unfavorite" />
+
+        <TextView
+            android:id="@+id/text1"
+            style="@style/SubText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/text_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/poster_image" />
+
+        <TextView
+            android:id="@+id/title_textView"
+            style="@style/MainText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/text1"
+            app:layout_constraintStart_toStartOf="@id/text1"
+            app:layout_constraintTop_toBottomOf="@id/text1"
+            tools:text="Clash of the Titans" />
+
+        <TextView
+            android:id="@+id/text2"
+            style="@style/SubText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/text_plot"
+            app:layout_constraintEnd_toEndOf="@id/title_textView"
+            app:layout_constraintStart_toStartOf="@id/title_textView"
+            app:layout_constraintTop_toBottomOf="@id/title_textView" />
+
+        <TextView
+            android:id="@+id/plot_textView"
+            style="@style/MainText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/text2"
+            app:layout_constraintStart_toStartOf="@id/text2"
+            app:layout_constraintTop_toBottomOf="@id/text2"
+            tools:text="@string/text_plot_placeholder" />
+
+        <TextView
+            android:id="@+id/text3"
+            style="@style/SubText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/text_release_date"
+            app:layout_constraintEnd_toEndOf="@id/plot_textView"
+            app:layout_constraintStart_toStartOf="@id/plot_textView"
+            app:layout_constraintTop_toBottomOf="@id/plot_textView" />
+
+        <TextView
+            android:id="@+id/release_date_text"
+            style="@style/MainText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/text3"
+            app:layout_constraintStart_toStartOf="@id/text3"
+            app:layout_constraintTop_toBottomOf="@id/text3"
+            tools:text="8th September, 2021" />
+
+        <TextView
+            android:id="@+id/text4"
+            style="@style/SubText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/text_vote_average"
+            app:layout_constraintEnd_toEndOf="@id/release_date_text"
+            app:layout_constraintStart_toStartOf="@id/release_date_text"
+            app:layout_constraintTop_toBottomOf="@id/release_date_text" />
+
+        <TextView
+            android:id="@+id/vote_average_text"
+            style="@style/MainText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/text4"
+            app:layout_constraintStart_toStartOf="@id/text4"
+            app:layout_constraintTop_toBottomOf="@id/text4"
+            tools:text="4.5" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
