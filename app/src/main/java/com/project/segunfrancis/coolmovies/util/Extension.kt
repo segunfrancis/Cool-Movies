@@ -2,9 +2,12 @@ package com.project.segunfrancis.coolmovies.util
 
 import android.content.Context
 import android.graphics.Color
+import android.view.View
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.project.segunfrancis.coolmovies.R
 
 /**
@@ -30,4 +33,13 @@ fun loadingIndicator(context: Context): CircularProgressDrawable {
         )
         start()
     }
+}
+
+fun View.snack(message: String, warning: Boolean) {
+    val snackbar = Snackbar.make(this, message, Snackbar.LENGTH_LONG)
+    if (warning)
+        snackbar.setBackgroundTint(ContextCompat.getColor(this.context, R.color.custom_yellow))
+    else
+        snackbar.setBackgroundTint(ContextCompat.getColor(this.context, R.color.custom_green))
+    snackbar.show()
 }

@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.project.segunfrancis.coolmovies.data.remote.model.Result
+import com.project.segunfrancis.coolmovies.data.model.Result
 import com.project.segunfrancis.coolmovies.repository.MovieRepository
 import kotlinx.coroutines.flow.Flow
 import timber.log.Timber

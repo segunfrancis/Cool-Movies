@@ -5,16 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.project.segunfrancis.coolmovies.databinding.FavoriteFragmentBinding
+import com.project.segunfrancis.coolmovies.ui.favorite.adapter.FavoriteMovieAdapter
+import com.project.segunfrancis.coolmovies.ui.home.HomeFragmentDirections
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FavoriteFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = FavoriteFragment()
-    }
 
     private var _binding: FavoriteFragmentBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: FavoriteViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,6 +28,21 @@ class FavoriteFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val favoriteAdapter = FavoriteMovieAdapter { result ->
+            val directions = HomeFragmentDirections.actionHomeFragmentToMovieDetailsFragment(result)
+            requireParentFragment().findNavController().navigate(directions)
+        }
+        binding.favoriteRecyclerView.apply {
+            adapter = favoriteAdapter
+            layoutManager = GridLayoutManager(requireContext(), 2)
+        }
+        viewModel.allFavorites.observe(viewLifecycleOwner) {
+            favoriteAdapter.submitList(it)
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

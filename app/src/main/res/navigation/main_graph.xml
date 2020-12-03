@@ -21,6 +21,6 @@
         tools:layout="@layout/fragment_movie_details" >
         <argument
             android:name="movieDetails"
-            app:argType="com.project.segunfrancis.coolmovies.data.remote.model.Result" />
+            app:argType="com.project.segunfrancis.coolmovies.data.model.Result" />
     </fragment>
 </navigation>

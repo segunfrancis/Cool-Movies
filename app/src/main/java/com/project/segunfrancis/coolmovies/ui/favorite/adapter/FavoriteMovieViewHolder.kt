@@ -1,4 +1,4 @@
-package com.project.segunfrancis.coolmovies.ui.all.adapter
+package com.project.segunfrancis.coolmovies.ui.favorite.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import com.project.segunfrancis.coolmovies.data.model.Result
@@ -11,16 +11,16 @@ import com.project.segunfrancis.coolmovies.util.loadImage
  * Created by SegunFrancis
  */
 
-class MovieViewHolder(
+class FavoriteMovieViewHolder(
     private val binding: ItemMovieListBinding,
-    private val onClick: (result: Result?) -> Unit
+    private val onClick: (result: Result) -> Unit
 ) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(result: Result?) = with(binding) {
-        movieTitle.text = result?.title
+    fun bind(result: Result) = with(binding) {
+        movieTitle.text = result.title
         movieThumbnail.loadImage(
-            IMAGE_BASE_URL.plus(POSTER_SIZE).plus(result?.poster_path)
+            IMAGE_BASE_URL.plus(POSTER_SIZE).plus(result.poster_path)
         )
         root.setOnClickListener { onClick(result) }
     }
