@@ -6,13 +6,13 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.project.segunfrancis.coolmovies.data.model.Result
-import com.project.segunfrancis.coolmovies.repository.MovieRepository
+import com.project.segunfrancis.coolmovies.usecase.GetTopRatedMoviesUseCase
 import kotlinx.coroutines.flow.Flow
 import timber.log.Timber
 
 class AllMoviesViewModel @ViewModelInject constructor(
-    private val repository: MovieRepository,
-    private val apiKey: String
+    private val apiKey: String,
+    private val getTopRatedMoviesUseCase: GetTopRatedMoviesUseCase
 ) :
     ViewModel() {
 
@@ -23,7 +23,7 @@ class AllMoviesViewModel @ViewModelInject constructor(
         if (lastResult != null) {
             return lastResult
         }
-        val newResult = repository.getTopRatedMovies(apiKey).cachedIn(viewModelScope)
+        val newResult = getTopRatedMoviesUseCase.execute(apiKey).cachedIn(viewModelScope)
         currentMovieResult = newResult
         Timber.d(newResult.toString())
         return newResult
