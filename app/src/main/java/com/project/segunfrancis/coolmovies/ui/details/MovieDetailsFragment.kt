@@ -14,6 +14,7 @@ import com.project.segunfrancis.coolmovies.databinding.FragmentMovieDetailsBindi
 import com.project.segunfrancis.coolmovies.ui.favorite.FavoriteViewModel
 import com.project.segunfrancis.coolmovies.util.AppConstants.BACKDROP_SIZE
 import com.project.segunfrancis.coolmovies.util.AppConstants.IMAGE_BASE_URL
+import com.project.segunfrancis.coolmovies.util.EventObserver
 import com.project.segunfrancis.coolmovies.util.loadImage
 import com.project.segunfrancis.coolmovies.util.snack
 import dagger.hilt.android.AndroidEntryPoint
@@ -67,9 +68,9 @@ class MovieDetailsFragment : Fragment() {
                 }
             })
         }
-        viewModel.favoriteMessage.observe(viewLifecycleOwner) {
+        viewModel.favoriteMessage.observe(viewLifecycleOwner, EventObserver {
             binding.root.snack(it, false)
-        }
+        })
     }
 
     override fun onDestroyView() {
