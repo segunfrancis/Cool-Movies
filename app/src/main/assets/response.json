@@ -1,0 +1,109 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "adult": false,
+      "backdrop_path": "/hW7K0B5Yr3v499SrWQO71ShGtWa.jpg",
+      "genre_ids": [
+        18,
+        80
+      ],
+      "id": 311,
+      "original_language": "en",
+      "original_title": "Once Upon a Time in America",
+      "overview": "A former Prohibition-era Jewish gangster returns to the Lower East Side of Manhattan over thirty years later, where he once again must confront the ghosts and regrets of his old life.",
+      "popularity": 145.951,
+      "poster_path": "/r31djHVfrGqOhTan4ov6HTCA7lr.jpg",
+      "release_date": "1984-05-23",
+      "title": "Once Upon a Time in America",
+      "video": false,
+      "vote_average": 8.5,
+      "vote_count": 3301
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/bx326cwBtDsfDcnTgFlK5dXkyaC.jpg",
+      "genre_ids": [
+        10402,
+        18,
+        10749
+      ],
+      "id": 630566,
+      "original_language": "en",
+      "original_title": "Clouds",
+      "overview": "Young musician Zach Sobiech discovers his cancer has spread, leaving him just a few months to live. With limited time, he follows his dream and makes an album, unaware that it will soon be a viral music phenomenon.",
+      "popularity": 134.708,
+      "poster_path": "/2YvT3pdGngzpbAuxamTz4ZlabnT.jpg",
+      "release_date": "2020-10-09",
+      "title": "Clouds",
+      "video": false,
+      "vote_average": 8.5,
+      "vote_count": 432
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/bh6yfB6I1N1WuMiX6K5HxGVZnja.jpg",
+      "genre_ids": [
+        35,
+        18
+      ],
+      "id": 42269,
+      "original_language": "it",
+      "original_title": "C'eravamo tanto amati",
+      "overview": "Gianni, Nicola and Antonio become close friends in 1944 while fighting the Nazis. After the end of the war, full of illusions, they settle down. The movie is a the story of the life of these three idealists and how they deal with the inevitable disillusionments of life.",
+      "popularity": 5.582,
+      "poster_path": "/zGGWYpiKNwjpKxelPxOMqJnUgDs.jpg",
+      "release_date": "1974-12-21",
+      "title": "We All Loved Each Other So Much",
+      "video": false,
+      "vote_average": 8.5,
+      "vote_count": 289
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/re3ZvlKJg04iLpLRf1xTKHS2wLU.jpg",
+      "genre_ids": [
+        16,
+        12,
+        35,
+        10751,
+        14,
+        10402,
+        28,
+        18
+      ],
+      "id": 537061,
+      "original_language": "en",
+      "original_title": "Steven Universe: The Movie",
+      "overview": "Two years after the events of \"Change Your Mind\", Steven (now 16 years old) and his friends are ready to enjoy the rest of their lives peacefully. However, all of that changes when a new sinister Gem arrives, armed with a giant drill that saps the life force of all living things on Earth. In their biggest challenge ever, the Crystal Gems must work together to save all organic life on Earth within 48 hours.",
+      "popularity": 84.973,
+      "poster_path": "/8mRgpubxHqnqvENK4Bei30xMDvy.jpg",
+      "release_date": "2019-09-02",
+      "title": "Steven Universe: The Movie",
+      "video": false,
+      "vote_average": 8.4,
+      "vote_count": 508
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/zoVeIgKzGJzpdG6Gwnr7iOYfIMU.jpg",
+      "genre_ids": [
+        18,
+        10749
+      ],
+      "id": 11216,
+      "original_language": "it",
+      "original_title": "Nuovo Cinema Paradiso",
+      "overview": "A filmmaker recalls his childhood, when he fell in love with the movies at his village's theater and formed a deep friendship with the theater's projectionist.",
+      "popularity": 16.374,
+      "poster_path": "/8SRUfRUi6x4O68n0VCbDNRa6iGL.jpg",
+      "release_date": "1988-11-17",
+      "title": "Cinema Paradiso",
+      "video": false,
+      "vote_average": 8.5,
+      "vote_count": 2630
+    }
+  ],
+  "total_pages": 403,
+  "total_results": 8054
+}
