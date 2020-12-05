@@ -53,7 +53,10 @@ class MovieDetailsFragment : Fragment() {
             titleTextView.text = result.title
             plotTextView.text = result.overview
             releaseDateText.text = result.release_date
-            voteAverageText.text = result.vote_average.toString()
+            progressBar.apply {
+                progress = result.vote_average.toFloat()
+                labelText = result.vote_average.toString()
+            }
             likeButton.setOnLikeListener(object : OnLikeListener {
                 override fun liked(likeButton: LikeButton?) {
                     viewModel.addFavorite(result)
@@ -69,7 +72,7 @@ class MovieDetailsFragment : Fragment() {
             })
         }
         viewModel.favoriteMessage.observe(viewLifecycleOwner, EventObserver {
-            binding.root.snack(it, false)
+            binding.root.snack(it.message, it.warning)
         })
     }
 

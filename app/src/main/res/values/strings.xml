@@ -8,4 +8,7 @@
     <string name="text_plot">Plot:</string>
     <string name="text_release_date">Release Date:</string>
     <string name="text_vote_average">Vote Average:</string>
+    <string name="text_error_unknown_host_exception">Check internet connection</string>
+    <string name="text_error_socket_timeout_exception">Internet might be slow, try again later</string>
+    <string name="text_error_general">Something went wrong</string>
 </resources>

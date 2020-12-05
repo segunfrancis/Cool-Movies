@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
+import com.project.segunfrancis.coolmovies.R
 import com.project.segunfrancis.coolmovies.databinding.AllMoviesFragmentBinding
 import com.project.segunfrancis.coolmovies.ui.all.adapter.MovieAdapter
 import com.project.segunfrancis.coolmovies.ui.all.adapter.MovieLoadStateAdapter
@@ -19,6 +20,8 @@ import com.project.segunfrancis.coolmovies.util.loadingIndicator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
 
 @AndroidEntryPoint
 class AllMoviesFragment : Fragment() {
@@ -62,7 +65,11 @@ class AllMoviesFragment : Fragment() {
                 ?: loadState.source.refresh as? LoadState.Error
                 ?: loadState.refresh as? LoadState.Error
             errorState?.let {
-                binding.errorText.text = it.error.localizedMessage
+                binding.errorText.text = when(it.error) {
+                    is UnknownHostException -> resources.getString(R.string.text_error_unknown_host_exception)
+                    is SocketTimeoutException -> resources.getString(R.string.text_error_socket_timeout_exception)
+                    else -> resources.getString(R.string.text_error_general)
+                }
             }
         }
 

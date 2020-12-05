@@ -110,17 +110,23 @@
             app:layout_constraintStart_toStartOf="@id/release_date_text"
             app:layout_constraintTop_toBottomOf="@id/release_date_text" />
 
-        <TextView
-            android:id="@+id/vote_average_text"
-            style="@style/MainText"
+        <com.skydoves.progressview.ProgressView
+            android:id="@+id/progress_bar"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="10dp"
             android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/text4"
             app:layout_constraintStart_toStartOf="@id/text4"
             app:layout_constraintTop_toBottomOf="@id/text4"
-            tools:text="4.5" />
+            app:progressView_animation="accelerateDecelerate"
+            app:progressView_autoAnimate="true"
+            app:progressView_colorProgress="@color/custom_green"
+            app:progressView_max="10"
+            app:progressView_min="0"
+            app:progressView_labelTypeface="bold"
+            app:progressView_colorBackground="@color/mid_gray"
+            app:progressView_radius="8dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

@@ -22,8 +22,8 @@ class FavoriteViewModel @ViewModelInject constructor(
     private val removeFavoriteUseCase: RemoveFavoriteUseCase
 ) : ViewModel() {
 
-    private var _favoriteMessage = MutableLiveData<Event<String>>()
-    val favoriteMessage: LiveData<Event<String>> get() = _favoriteMessage
+    private var _favoriteMessage = MutableLiveData<Event<FavoriteState>>()
+    val favoriteMessage: LiveData<Event<FavoriteState>> get() = _favoriteMessage
 
     private var _allFavorites = MutableLiveData<List<Result>>()
     val allFavorites: LiveData<List<Result>> get() = _allFavorites
@@ -36,7 +36,7 @@ class FavoriteViewModel @ViewModelInject constructor(
         viewModelScope.launch(dispatcher) {
             addFavoriteUseCase.execute(result)
                 .onCompletion {
-                    _favoriteMessage.postValue(Event("Added to favorites"))
+                    _favoriteMessage.postValue(Event(FavoriteState("Added to favorites", false)))
                 }
                 .collect { }
         }
@@ -46,7 +46,7 @@ class FavoriteViewModel @ViewModelInject constructor(
         viewModelScope.launch(dispatcher) {
             removeFavoriteUseCase.execute(id)
                 .onCompletion {
-                    _favoriteMessage.postValue(Event("Removed from favorites"))
+                    _favoriteMessage.postValue(Event(FavoriteState("Removed from favorites", true)))
                 }
                 .collect { }
         }
