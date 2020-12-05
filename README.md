@@ -36,7 +36,7 @@ A simple android Movie app built using clean architecture, MVVM architecture wit
 * [Like Button](https://github.com/jd-alexander/LikeButton) - A library that allows you to create a button with animation effects similar to Twitter's heart when you like something.
 * [Lottie for Android](https://github.com/airbnb/lottie-android) - A library that helps you render After Effects animations natively on Android
 * [ProgressView](https://github.com/skydoves/ProgressView) - A polished and flexible ProgressView, fully customizable with animations.
-* [Mock Web Server](https://site.mockito.org/) - Mockito is a mocking framework that lets you write beautiful tests with a clean & simple API.
+* [Mock Web Server](https://square.github.io/okhttp/4.x/mockwebserver/okhttp3.mockwebserver/-mock-web-server/) - Mock web server is a scriptable web server.
 * [Mockito-Kotlin](https://github.com/nhaarman/mockito-kotlin) - A library that provides helper functions to work with Mockito in kotlin.
 * [Coroutines test](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-test/)
 
@@ -52,7 +52,7 @@ A simple android Movie app built using clean architecture, MVVM architecture wit
 ## Author
 
 * **Segun Francis**  
-- [LinkedIn](https://www.linkedin.com/in/segun-francis-302361a1)
+ - [LinkedIn](https://www.linkedin.com/in/segun-francis-302361a1)
 
 
 ## License
