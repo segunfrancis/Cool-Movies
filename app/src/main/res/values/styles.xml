@@ -10,11 +10,18 @@
     <style name="SubText" parent="TextAppearance.AppCompat.Body2">
         <item name="android:textSize">14sp</item>
         <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/abeezee</item>
         <item name="android:textColor">@color/darker_gray</item>
     </style>
 
     <style name="MainText" parent="TextAppearance.AppCompat.Display2">
         <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/abeezee</item>
+    </style>
+
+    <style name="TabText" parent="MainText">
+        <item name="android:textSize">16sp</item>
+        <item name="textAllCaps">true</item>
     </style>
 
 </resources>

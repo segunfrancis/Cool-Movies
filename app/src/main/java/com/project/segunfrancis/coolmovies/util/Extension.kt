@@ -9,6 +9,8 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.project.segunfrancis.coolmovies.R
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
 
 /**
  * Created by SegunFrancis
@@ -42,4 +44,12 @@ fun View.snack(message: String, warning: Boolean) {
     else
         snackbar.setBackgroundTint(ContextCompat.getColor(this.context, R.color.custom_green))
     snackbar.show()
+}
+
+fun Throwable.errorMessage(context: Context): String {
+    return when(this) {
+        is UnknownHostException -> context.resources.getString(R.string.text_error_unknown_host_exception)
+        is SocketTimeoutException -> context.resources.getString(R.string.text_error_socket_timeout_exception)
+        else -> context.resources.getString(R.string.text_error_general)
+    }
 }
