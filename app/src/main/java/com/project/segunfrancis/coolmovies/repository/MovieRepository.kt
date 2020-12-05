@@ -1,6 +1,7 @@
 package com.project.segunfrancis.coolmovies.repository
 
 import androidx.paging.PagingData
+import com.project.segunfrancis.coolmovies.data.model.GenreResponse
 import com.project.segunfrancis.coolmovies.data.model.Result
 import kotlinx.coroutines.flow.Flow
 
@@ -17,4 +18,6 @@ interface MovieRepository {
     fun removeFavorite(id: Int): Flow<Unit>
 
     fun getAllFavorites(): Flow<List<Result>>
+
+    fun getGenresRemote(apiKey: String): Flow<GenreResponse>
 }
