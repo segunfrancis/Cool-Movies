@@ -6,15 +6,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.like.LikeButton
 import com.like.OnLikeListener
 import com.project.segunfrancis.coolmovies.databinding.FragmentMovieDetailsBinding
+import com.project.segunfrancis.coolmovies.ui.MainViewModel
 import com.project.segunfrancis.coolmovies.ui.favorite.FavoriteViewModel
+import com.project.segunfrancis.coolmovies.ui.model.Genre
 import com.project.segunfrancis.coolmovies.util.AppConstants.BACKDROP_SIZE
 import com.project.segunfrancis.coolmovies.util.AppConstants.IMAGE_BASE_URL
 import com.project.segunfrancis.coolmovies.util.EventObserver
+import com.project.segunfrancis.coolmovies.util.State
 import com.project.segunfrancis.coolmovies.util.loadImage
 import com.project.segunfrancis.coolmovies.util.snack
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,8 +31,11 @@ class MovieDetailsFragment : Fragment() {
     private val binding get() = _binding!!
     private val args: MovieDetailsFragmentArgs by navArgs()
     private val viewModel: FavoriteViewModel by viewModels()
+    private val mainViewModel: MainViewModel by viewModels()
+
     @Inject
     lateinit var sharedPreferences: SharedPreferences
+    private val genreIDs: MutableList<Genre>? = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,6 +53,17 @@ class MovieDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        mainViewModel.genreIDs.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is State.Success -> {
+                    val genreText = ""
+
+                    binding.genres.text = genreText
+                    Toast.makeText(requireContext(), state.data.toString(), Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
         val editor = sharedPreferences.edit()
         val result = args.movieDetails
         with(binding) {
@@ -57,6 +75,13 @@ class MovieDetailsFragment : Fragment() {
                 progress = result.vote_average.toFloat()
                 labelText = result.vote_average.toString()
             }
+            /*val genreText = ""
+            if (genreIDs != null) {
+                for (genre in genreIDs) {
+                    if (result.genre_ids.contains(genre.id))
+                        genreText.plus(genre.name).plus(" ")
+                }
+            }*/
             likeButton.setOnLikeListener(object : OnLikeListener {
                 override fun liked(likeButton: LikeButton?) {
                     viewModel.addFavorite(result)

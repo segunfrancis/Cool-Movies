@@ -5,11 +5,13 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
 import com.project.segunfrancis.coolmovies.data.local.db.MovieDatabase
+import com.project.segunfrancis.coolmovies.data.mapper.GenreLocalMapper
 import com.project.segunfrancis.coolmovies.data.mapper.GenreMapper
 import com.project.segunfrancis.coolmovies.data.mapper.ResultMapper
 import com.project.segunfrancis.coolmovies.data.mapper.ResultLocalMapper
 import com.project.segunfrancis.coolmovies.data.remote.api.MovieApi
 import com.project.segunfrancis.coolmovies.data.remote.source.MoviePagingSource
+import com.project.segunfrancis.coolmovies.domain.model.GenreDomain
 import com.project.segunfrancis.coolmovies.domain.model.GenreResponseDomain
 import com.project.segunfrancis.coolmovies.domain.model.ResultDomain
 import com.project.segunfrancis.coolmovies.domain.repository.MovieRepository
@@ -28,7 +30,8 @@ class MovieRepositoryImpl @Inject constructor(
     private val db: MovieDatabase,
     private val resultMapper: ResultMapper,
     private val genreMapper: GenreMapper,
-    private val resultLocalMapper: ResultLocalMapper
+    private val resultLocalMapper: ResultLocalMapper,
+    private val genreLocalMapper: GenreLocalMapper
 ) : MovieRepository {
     override fun getTopRatedMovies(apiKey: String): Flow<PagingData<ResultDomain>> {
         return Pager(
@@ -68,6 +71,20 @@ class MovieRepositoryImpl @Inject constructor(
     override fun getGenresRemote(apiKey: String): Flow<GenreResponseDomain> {
         return flow {
             emit(genreMapper.mapDataToDomainLayer(api.getGenres(apiKey)))
+        }
+    }
+
+    override fun insertGenreIDs(genre: GenreDomain): Flow<Unit> {
+        return flow {
+            emit(db.movieDao().insertGenreIDs(genreLocalMapper.mapDomainToDataLayer(genre)))
+        }
+    }
+
+    override fun getGenreLocalIDs(): Flow<List<GenreDomain>> {
+        return db.movieDao().getGenreIDs().map { genres ->
+            genres.map {
+                genreLocalMapper.mapDataToDomainLayer(it)
+            }
         }
     }
 }

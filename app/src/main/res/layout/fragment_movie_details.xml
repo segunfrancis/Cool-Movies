@@ -116,7 +116,7 @@
             android:layout_height="10dp"
             android:layout_marginBottom="16dp"
             android:layout_marginTop="4dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/text6"
             app:layout_constraintEnd_toEndOf="@id/text4"
             app:layout_constraintStart_toStartOf="@id/text4"
             app:layout_constraintTop_toBottomOf="@id/text4"
@@ -128,6 +128,29 @@
             app:progressView_labelTypeface="bold"
             app:progressView_colorBackground="@color/mid_gray"
             app:progressView_radius="8dp" />
+
+        <TextView
+            android:id="@+id/text6"
+            style="@style/SubText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Genre"
+            app:layout_constraintEnd_toEndOf="@id/progress_bar"
+            app:layout_constraintStart_toStartOf="@id/progress_bar"
+            app:layout_constraintTop_toBottomOf="@id/progress_bar" />
+
+        <TextView
+            android:id="@+id/genres"
+            style="@style/MainText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintEnd_toEndOf="@id/text6"
+            app:layout_constraintStart_toStartOf="@id/text6"
+            app:layout_constraintTop_toBottomOf="@id/text6"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="Action, Adventure" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

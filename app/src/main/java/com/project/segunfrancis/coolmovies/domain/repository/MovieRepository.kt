@@ -1,7 +1,7 @@
 package com.project.segunfrancis.coolmovies.domain.repository
 
 import androidx.paging.PagingData
-import com.project.segunfrancis.coolmovies.data.remote.model.Result
+import com.project.segunfrancis.coolmovies.domain.model.GenreDomain
 import com.project.segunfrancis.coolmovies.domain.model.GenreResponseDomain
 import com.project.segunfrancis.coolmovies.domain.model.ResultDomain
 import kotlinx.coroutines.flow.Flow
@@ -21,4 +21,8 @@ interface MovieRepository {
     fun getAllFavorites(): Flow<List<ResultDomain>>
 
     fun getGenresRemote(apiKey: String): Flow<GenreResponseDomain>
+
+    fun insertGenreIDs(genre: GenreDomain): Flow<Unit>
+
+    fun getGenreLocalIDs(): Flow<List<GenreDomain>>
 }

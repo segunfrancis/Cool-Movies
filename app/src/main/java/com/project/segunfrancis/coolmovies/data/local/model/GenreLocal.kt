@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
  * Created by SegunFrancis
  */
 
-@Entity
+@Entity(tableName = "genre_id_table")
 data class GenreLocal(
     @PrimaryKey val id: Int,
     val name: String
