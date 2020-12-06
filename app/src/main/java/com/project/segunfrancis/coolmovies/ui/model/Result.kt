@@ -1,17 +1,14 @@
-package com.project.segunfrancis.coolmovies.data.model
+package com.project.segunfrancis.coolmovies.ui.model
 
 import android.os.Parcelable
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-@Entity(tableName = "movie_table")
 data class Result(
     val adult: Boolean,
     val backdrop_path: String,
     val genre_ids: List<Int>,
-    @PrimaryKey val id: Int,
+    val id: Int,
     val original_language: String,
     val original_title: String,
     val overview: String,

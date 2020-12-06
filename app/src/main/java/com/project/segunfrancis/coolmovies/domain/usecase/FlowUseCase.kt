@@ -1,4 +1,4 @@
-package com.project.segunfrancis.coolmovies.usecase
+package com.project.segunfrancis.coolmovies.domain.usecase
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow

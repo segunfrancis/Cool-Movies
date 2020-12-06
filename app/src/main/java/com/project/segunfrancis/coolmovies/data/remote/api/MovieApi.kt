@@ -1,7 +1,7 @@
 package com.project.segunfrancis.coolmovies.data.remote.api
 
-import com.project.segunfrancis.coolmovies.data.model.GenreResponse
-import com.project.segunfrancis.coolmovies.data.model.MovieResponse
+import com.project.segunfrancis.coolmovies.data.remote.model.GenreResponse
+import com.project.segunfrancis.coolmovies.data.remote.model.MovieResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 

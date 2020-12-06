@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.project.segunfrancis.coolmovies.R
-import com.project.segunfrancis.coolmovies.data.model.Result
+import com.project.segunfrancis.coolmovies.ui.model.Result
 import com.project.segunfrancis.coolmovies.databinding.ItemMovieListBinding
 
 /**

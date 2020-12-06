@@ -7,12 +7,15 @@ import com.project.segunfrancis.coolmovies.MainCoroutineRule
 import com.project.segunfrancis.coolmovies.TestSetup.database
 import com.project.segunfrancis.coolmovies.TestSetup.result
 import com.project.segunfrancis.coolmovies.data.local.db.MovieDatabase
+import com.project.segunfrancis.coolmovies.data.mapper.GenreMapper
+import com.project.segunfrancis.coolmovies.data.mapper.ResultLocalMapper
+import com.project.segunfrancis.coolmovies.data.mapper.ResultMapper
 import com.project.segunfrancis.coolmovies.data.remote.api.MovieApi
-import com.project.segunfrancis.coolmovies.repository.MovieRepository
-import com.project.segunfrancis.coolmovies.repository.MovieRepositoryImpl
-import com.project.segunfrancis.coolmovies.usecase.AddFavoriteUseCase
-import com.project.segunfrancis.coolmovies.usecase.GetAllFavoritesUseCase
-import com.project.segunfrancis.coolmovies.usecase.RemoveFavoriteUseCase
+import com.project.segunfrancis.coolmovies.domain.repository.MovieRepository
+import com.project.segunfrancis.coolmovies.data.repository.MovieRepositoryImpl
+import com.project.segunfrancis.coolmovies.domain.usecase.AddFavoriteUseCase
+import com.project.segunfrancis.coolmovies.domain.usecase.GetAllFavoritesUseCase
+import com.project.segunfrancis.coolmovies.domain.usecase.RemoveFavoriteUseCase
 import junit.framework.TestCase.assertNotNull
 import org.junit.Rule
 import org.junit.Test
@@ -32,7 +35,11 @@ class FavoriteViewModelTest {
     private val db: MovieDatabase = database(context)
     private val dispatcher = coroutineRule.testDispatcher
     private val api: MovieApi = mock()
-    private val repository: MovieRepository = MovieRepositoryImpl(api, db, dispatcher)
+    private val resultMapper = ResultMapper()
+    private val resultMapperUI = com.project.segunfrancis.coolmovies.ui.mapper.ResultMapper()
+    private val genreMapper = GenreMapper()
+    private val resultLocalMapper = ResultLocalMapper()
+    private val repository: MovieRepository = MovieRepositoryImpl(api, db, resultMapper, genreMapper, resultLocalMapper)
     private val result = result()
 
 
@@ -45,7 +52,8 @@ class FavoriteViewModelTest {
             coroutineRule.testDispatcher,
             getAllFavoritesUseCase,
             addFavoritesUseCase,
-            removeFavoriteUseCase
+            removeFavoriteUseCase,
+            resultMapperUI
         )
 
         viewModel.addFavorite(result)

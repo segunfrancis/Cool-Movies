@@ -4,8 +4,8 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.project.segunfrancis.coolmovies.data.model.Genre
-import com.project.segunfrancis.coolmovies.usecase.GetGenresRemoteUseCase
+import com.project.segunfrancis.coolmovies.domain.usecase.GetGenresRemoteUseCase
+import com.project.segunfrancis.coolmovies.ui.model.Genre
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
@@ -35,7 +35,7 @@ class MainViewModel @ViewModelInject constructor(
                     Timber.d(it.localizedMessage)
                 }
                 .collect {
-                    temp.postValue(it.genres)
+
                 }
         }
     }

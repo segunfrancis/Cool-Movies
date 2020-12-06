@@ -1,7 +1,7 @@
-package com.project.segunfrancis.coolmovies.usecase
+package com.project.segunfrancis.coolmovies.domain.usecase
 
-import com.project.segunfrancis.coolmovies.data.model.Result
-import com.project.segunfrancis.coolmovies.repository.MovieRepository
+import com.project.segunfrancis.coolmovies.domain.model.ResultDomain
+import com.project.segunfrancis.coolmovies.domain.repository.MovieRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -12,9 +12,9 @@ import javax.inject.Inject
 class AddFavoriteUseCase @Inject constructor(
     private val repository: MovieRepository,
     dispatcher: CoroutineDispatcher
-) : FlowUseCase<Unit, Result>(dispatcher) {
+) : FlowUseCase<Unit, ResultDomain>(dispatcher) {
 
-    override fun buildFlowUseCase(params: Result?): Flow<Unit> {
+    override fun buildFlowUseCase(params: ResultDomain?): Flow<Unit> {
         return repository.addFavorite(params!!)
     }
 }

@@ -2,7 +2,7 @@ package com.project.segunfrancis.coolmovies.data.remote.source
 
 import androidx.paging.PagingSource
 import com.project.segunfrancis.coolmovies.data.remote.api.MovieApi
-import com.project.segunfrancis.coolmovies.data.model.Result
+import com.project.segunfrancis.coolmovies.data.remote.model.Result
 import javax.inject.Inject
 
 /**

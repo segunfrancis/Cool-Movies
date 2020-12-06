@@ -1,4 +1,4 @@
-package com.project.segunfrancis.coolmovies.data.model
+package com.project.segunfrancis.coolmovies.data.remote.model
 
 data class MovieResponse(
     val page: Int,

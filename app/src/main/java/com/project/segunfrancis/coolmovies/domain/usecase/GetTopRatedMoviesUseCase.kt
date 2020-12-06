@@ -1,8 +1,8 @@
-package com.project.segunfrancis.coolmovies.usecase
+package com.project.segunfrancis.coolmovies.domain.usecase
 
 import androidx.paging.PagingData
-import com.project.segunfrancis.coolmovies.data.model.Result
-import com.project.segunfrancis.coolmovies.repository.MovieRepository
+import com.project.segunfrancis.coolmovies.domain.model.ResultDomain
+import com.project.segunfrancis.coolmovies.domain.repository.MovieRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -15,9 +15,9 @@ class GetTopRatedMoviesUseCase @Inject constructor(
     private val repository: MovieRepository,
     dispatcher: CoroutineDispatcher
 ) :
-    FlowUseCase<PagingData<Result>, String>(dispatcher) {
+    FlowUseCase<PagingData<ResultDomain>, String>(dispatcher) {
 
-    override fun buildFlowUseCase(params: String?): Flow<PagingData<Result>> {
+    override fun buildFlowUseCase(params: String?): Flow<PagingData<ResultDomain>> {
         return repository.getTopRatedMovies(params!!)
     }
 }

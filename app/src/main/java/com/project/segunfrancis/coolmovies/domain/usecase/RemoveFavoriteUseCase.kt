@@ -1,6 +1,6 @@
-package com.project.segunfrancis.coolmovies.usecase
+package com.project.segunfrancis.coolmovies.domain.usecase
 
-import com.project.segunfrancis.coolmovies.repository.MovieRepository
+import com.project.segunfrancis.coolmovies.domain.repository.MovieRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

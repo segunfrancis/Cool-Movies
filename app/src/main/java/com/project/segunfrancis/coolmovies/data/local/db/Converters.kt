@@ -1,4 +1,4 @@
-package com.project.segunfrancis.coolmovies.data.local
+package com.project.segunfrancis.coolmovies.data.local.db
 
 import androidx.room.TypeConverter
 

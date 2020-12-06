@@ -1,14 +1,12 @@
 package com.project.segunfrancis.coolmovies.ui.favorite
 
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.project.segunfrancis.coolmovies.data.model.Result
-import com.project.segunfrancis.coolmovies.usecase.AddFavoriteUseCase
-import com.project.segunfrancis.coolmovies.usecase.GetAllFavoritesUseCase
-import com.project.segunfrancis.coolmovies.usecase.RemoveFavoriteUseCase
+import androidx.lifecycle.*
+import com.project.segunfrancis.coolmovies.domain.usecase.AddFavoriteUseCase
+import com.project.segunfrancis.coolmovies.domain.usecase.GetAllFavoritesUseCase
+import com.project.segunfrancis.coolmovies.domain.usecase.RemoveFavoriteUseCase
+import com.project.segunfrancis.coolmovies.ui.mapper.ResultMapper
+import com.project.segunfrancis.coolmovies.ui.model.Result
 import com.project.segunfrancis.coolmovies.util.Event
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.collect
@@ -19,7 +17,8 @@ class FavoriteViewModel @ViewModelInject constructor(
     private val dispatcher: CoroutineDispatcher,
     private val getAllFavoritesUseCase: GetAllFavoritesUseCase,
     private val addFavoriteUseCase: AddFavoriteUseCase,
-    private val removeFavoriteUseCase: RemoveFavoriteUseCase
+    private val removeFavoriteUseCase: RemoveFavoriteUseCase,
+    private val resultMapper: ResultMapper
 ) : ViewModel() {
 
     private var _favoriteMessage = MutableLiveData<Event<FavoriteState>>()
@@ -34,7 +33,7 @@ class FavoriteViewModel @ViewModelInject constructor(
 
     fun addFavorite(result: Result) {
         viewModelScope.launch(dispatcher) {
-            addFavoriteUseCase.execute(result)
+            addFavoriteUseCase.execute(resultMapper.mapDomainToDataLayer(result))
                 .onCompletion {
                     _favoriteMessage.postValue(Event(FavoriteState("Added to favorites", false)))
                 }
@@ -56,7 +55,9 @@ class FavoriteViewModel @ViewModelInject constructor(
         viewModelScope.launch(dispatcher) {
             getAllFavoritesUseCase.execute()
                 .collect {
-                    _allFavorites.postValue(it)
+                    _allFavorites.postValue(it.map { result ->
+                        resultMapper.mapDataToDomainLayer(result)
+                    })
                 }
         }
     }

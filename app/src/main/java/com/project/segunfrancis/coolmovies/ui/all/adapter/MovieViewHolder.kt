@@ -1,7 +1,7 @@
 package com.project.segunfrancis.coolmovies.ui.all.adapter
 
 import androidx.recyclerview.widget.RecyclerView
-import com.project.segunfrancis.coolmovies.data.model.Result
+import com.project.segunfrancis.coolmovies.ui.model.Result
 import com.project.segunfrancis.coolmovies.databinding.ItemMovieListBinding
 import com.project.segunfrancis.coolmovies.util.AppConstants.IMAGE_BASE_URL
 import com.project.segunfrancis.coolmovies.util.AppConstants.POSTER_SIZE

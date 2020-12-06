@@ -5,14 +5,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.project.segunfrancis.coolmovies.data.model.Result
-import com.project.segunfrancis.coolmovies.usecase.GetTopRatedMoviesUseCase
+import androidx.paging.map
+import com.project.segunfrancis.coolmovies.domain.usecase.GetTopRatedMoviesUseCase
+import com.project.segunfrancis.coolmovies.ui.mapper.ResultMapper
+import com.project.segunfrancis.coolmovies.ui.model.Result
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import timber.log.Timber
 
 class AllMoviesViewModel @ViewModelInject constructor(
     private val apiKey: String,
-    private val getTopRatedMoviesUseCase: GetTopRatedMoviesUseCase
+    private val getTopRatedMoviesUseCase: GetTopRatedMoviesUseCase,
+    private val resultMapper: ResultMapper
 ) :
     ViewModel() {
 
@@ -23,7 +27,11 @@ class AllMoviesViewModel @ViewModelInject constructor(
         if (lastResult != null) {
             return lastResult
         }
-        val newResult = getTopRatedMoviesUseCase.execute(apiKey).cachedIn(viewModelScope)
+        val newResult = getTopRatedMoviesUseCase.execute(apiKey).cachedIn(viewModelScope).map {
+            it.map { resultDomain ->
+                resultMapper.mapDataToDomainLayer(resultDomain)
+            }
+        }
         currentMovieResult = newResult
         Timber.d(newResult.toString())
         return newResult
