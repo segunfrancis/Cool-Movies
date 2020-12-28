@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.like.LikeButton
@@ -22,6 +22,7 @@ import com.project.segunfrancis.coolmovies.util.State
 import com.project.segunfrancis.coolmovies.util.loadImage
 import com.project.segunfrancis.coolmovies.util.snack
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -35,12 +36,11 @@ class MovieDetailsFragment : Fragment() {
 
     @Inject
     lateinit var sharedPreferences: SharedPreferences
-    private val genreIDs: MutableList<Genre>? = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentMovieDetailsBinding.inflate(layoutInflater)
 
         // Setting the state of the Like button
@@ -56,11 +56,26 @@ class MovieDetailsFragment : Fragment() {
         mainViewModel.genreIDs.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is State.Success -> {
-                    val genreText = ""
-
-                    binding.genres.text = genreText
-                    Toast.makeText(requireContext(), state.data.toString(), Toast.LENGTH_SHORT).show()
+                    val items = state.data
+                    val result = args.movieDetails
+                    val genreIDs: MutableList<Genre> = mutableListOf()
+                    for (item in result.genre_ids) {
+                        for (genre in items!!) {
+                            if (genre.id == item) {
+                                genreIDs.add(genre)
+                            }
+                        }
+                    }
+                    val tempList: MutableList<String> = mutableListOf()
+                    for (genre in genreIDs) {
+                        tempList.add(genre.name)
+                    }
+                    binding.text6.isVisible = tempList.isNotEmpty()
+                    binding.genres.text = tempList.toString().removeSurrounding("[", "]")
                 }
+
+                is State.Loading -> {}
+                is State.Error -> { Timber.e(state.error) }
             }
         }
 
@@ -75,13 +90,6 @@ class MovieDetailsFragment : Fragment() {
                 progress = result.vote_average.toFloat()
                 labelText = result.vote_average.toString()
             }
-            /*val genreText = ""
-            if (genreIDs != null) {
-                for (genre in genreIDs) {
-                    if (result.genre_ids.contains(genre.id))
-                        genreText.plus(genre.name).plus(" ")
-                }
-            }*/
             likeButton.setOnLikeListener(object : OnLikeListener {
                 override fun liked(likeButton: LikeButton?) {
                     viewModel.addFavorite(result)

@@ -9,7 +9,7 @@ import javax.inject.Inject
  * Created by SegunFrancis
  */
 
-class MoviePagingSource @Inject constructor(private val api: MovieApi, private val apiKey: String) :
+class NowPlayingPagingSource @Inject constructor(private val api: MovieApi, private val apiKey: String) :
     PagingSource<Int, Result>() {
 
     companion object {
@@ -19,7 +19,7 @@ class MoviePagingSource @Inject constructor(private val api: MovieApi, private v
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Result> {
         val position = params.key ?: STARTING_PAGE_INDEX
         return try {
-            val response = api.getTopRatedMovies(apiKey, position)
+            val response = api.getNowPlaying(apiKey, position)
             val movies = response.results
             LoadResult.Page(
                 data = movies,

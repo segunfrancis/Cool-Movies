@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.top_rated.TopRatedMoviesFragment">
+    tools:context=".ui.now_playing.NowPlayingFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/movie_recyclerView"
@@ -36,9 +36,9 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:fontFamily="@font/abeezee"
         android:textAlignment="center"
         android:textSize="18sp"
-        android:fontFamily="@font/abeezee"
         app:layout_constraintBottom_toTopOf="@id/retry_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,8 +51,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="16dp"
-        android:text="@string/retry"
         android:fontFamily="@font/abeezee"
+        android:text="@string/retry"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/error_text"
         app:layout_constraintStart_toStartOf="@+id/error_text"
@@ -67,4 +67,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

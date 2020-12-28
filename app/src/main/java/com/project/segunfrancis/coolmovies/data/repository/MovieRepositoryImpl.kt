@@ -10,7 +10,9 @@ import com.project.segunfrancis.coolmovies.data.mapper.GenreMapper
 import com.project.segunfrancis.coolmovies.data.mapper.ResultMapper
 import com.project.segunfrancis.coolmovies.data.mapper.ResultLocalMapper
 import com.project.segunfrancis.coolmovies.data.remote.api.MovieApi
-import com.project.segunfrancis.coolmovies.data.remote.source.MoviePagingSource
+import com.project.segunfrancis.coolmovies.data.remote.source.NowPlayingPagingSource
+import com.project.segunfrancis.coolmovies.data.remote.source.PopularPagingSource
+import com.project.segunfrancis.coolmovies.data.remote.source.TopRatedPagingSource
 import com.project.segunfrancis.coolmovies.domain.model.GenreDomain
 import com.project.segunfrancis.coolmovies.domain.model.GenreResponseDomain
 import com.project.segunfrancis.coolmovies.domain.model.ResultDomain
@@ -39,7 +41,35 @@ class MovieRepositoryImpl @Inject constructor(
                 pageSize = NETWORK_PAGE_SIZE,
                 enablePlaceholders = false
             ), pagingSourceFactory = {
-                MoviePagingSource(api, apiKey)
+                TopRatedPagingSource(api, apiKey)
+            }).flow.map { pagingData ->
+            pagingData.map {
+                resultMapper.mapDataToDomainLayer(it)
+            }
+        }
+    }
+
+    override fun getPopularMovies(apiKey: String): Flow<PagingData<ResultDomain>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = NETWORK_PAGE_SIZE,
+                enablePlaceholders = false
+            ), pagingSourceFactory = {
+                PopularPagingSource(api, apiKey)
+            }).flow.map { pagingData ->
+            pagingData.map {
+                resultMapper.mapDataToDomainLayer(it)
+            }
+        }
+    }
+
+    override fun getNowPlayingMovies(apiKey: String): Flow<PagingData<ResultDomain>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = NETWORK_PAGE_SIZE,
+                enablePlaceholders = false
+            ), pagingSourceFactory = {
+                NowPlayingPagingSource(api, apiKey)
             }).flow.map { pagingData ->
             pagingData.map {
                 resultMapper.mapDataToDomainLayer(it)

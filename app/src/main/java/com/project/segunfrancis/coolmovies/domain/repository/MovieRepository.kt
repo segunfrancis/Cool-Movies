@@ -14,6 +14,10 @@ interface MovieRepository {
 
     fun getTopRatedMovies(apiKey: String): Flow<PagingData<ResultDomain>>
 
+    fun getPopularMovies(apiKey: String): Flow<PagingData<ResultDomain>>
+
+    fun getNowPlayingMovies(apiKey: String): Flow<PagingData<ResultDomain>>
+
     fun addFavorite(result: ResultDomain): Flow<Unit>
 
     fun removeFavorite(id: Int): Flow<Unit>

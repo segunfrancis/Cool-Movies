@@ -1,5 +1,6 @@
 package com.project.segunfrancis.coolmovies.di
 
+import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.project.segunfrancis.coolmovies.BuildConfig
@@ -10,6 +11,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
+import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -38,17 +41,24 @@ object RemoteModule {
         return GsonBuilder().setLenient().create()
     }
 
-    private fun provideOkHttpClient(): OkHttpClient {
+    private fun provideCache(context: Context): Cache {
+        val cacheDir = context.cacheDir
+        val cacheSize = 20 * 1024 * 1024    // 20 MB
+        return Cache(cacheDir, cacheSize.toLong())
+    }
+
+    private fun provideOkHttpClient(context: Context): OkHttpClient {
         return OkHttpClient.Builder()
             .readTimeout(TIMEOUT, TimeUnit.SECONDS)
             .callTimeout(TIMEOUT, TimeUnit.SECONDS)
             .addInterceptor(provideLoggingInterceptor())
+            .cache(provideCache(context))
             .build()
     }
 
-    private fun provideRetrofit(): Retrofit {
+    private fun provideRetrofit(context: Context): Retrofit {
         return Retrofit.Builder()
-            .client(provideOkHttpClient())
+            .client(provideOkHttpClient(context))
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(provideGson()))
             .build()
@@ -56,8 +66,8 @@ object RemoteModule {
 
     @Provides
     @Singleton
-    fun provideMovieApi(): MovieApi {
-        return provideRetrofit().create(MovieApi::class.java)
+    fun provideMovieApi(@ApplicationContext context: Context): MovieApi {
+        return provideRetrofit(context).create(MovieApi::class.java)
     }
 
     @Provides

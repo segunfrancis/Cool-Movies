@@ -1,4 +1,4 @@
-package com.project.segunfrancis.coolmovies.ui.all
+package com.project.segunfrancis.coolmovies.ui.popular
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,10 +11,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
-import com.project.segunfrancis.coolmovies.databinding.AllMoviesFragmentBinding
-import com.project.segunfrancis.coolmovies.ui.all.adapter.MovieAdapter
-import com.project.segunfrancis.coolmovies.ui.all.adapter.MovieLoadStateAdapter
+import com.project.segunfrancis.coolmovies.databinding.PopularFragmentBinding
 import com.project.segunfrancis.coolmovies.ui.home.HomeFragmentDirections
+import com.project.segunfrancis.coolmovies.ui.top_rated.adapter.MovieAdapter
+import com.project.segunfrancis.coolmovies.ui.top_rated.adapter.MovieLoadStateAdapter
 import com.project.segunfrancis.coolmovies.util.errorMessage
 import com.project.segunfrancis.coolmovies.util.loadingIndicator
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,17 +22,17 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class AllMoviesFragment : Fragment() {
+class PopularMoviesFragment : Fragment() {
 
-    private var _binding: AllMoviesFragmentBinding? = null
+    private var _binding: PopularFragmentBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: AllMoviesViewModel by viewModels()
+    private val viewModel: PopularViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = AllMoviesFragmentBinding.inflate(layoutInflater)
+    ): View {
+        _binding = PopularFragmentBinding.inflate(layoutInflater)
         binding.loadingIndicator.setImageDrawable(loadingIndicator(requireContext()))
         return binding.root
     }
@@ -68,7 +68,7 @@ class AllMoviesFragment : Fragment() {
         }
 
         lifecycleScope.launch {
-            viewModel.getTopRatedMovies().collectLatest {
+            viewModel.getPopularMovies().collectLatest {
                 movieAdapter.submitData(it)
             }
         }

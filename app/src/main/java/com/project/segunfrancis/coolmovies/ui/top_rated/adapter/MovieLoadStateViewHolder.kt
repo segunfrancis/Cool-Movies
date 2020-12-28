@@ -1,4 +1,4 @@
-package com.project.segunfrancis.coolmovies.ui.all.adapter
+package com.project.segunfrancis.coolmovies.ui.top_rated.adapter
 
 import androidx.core.view.isVisible
 import androidx.paging.LoadState

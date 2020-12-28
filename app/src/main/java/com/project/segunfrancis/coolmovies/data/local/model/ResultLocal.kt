@@ -11,7 +11,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "movie_table")
 data class ResultLocal(
     val adult: Boolean,
-    val backdrop_path: String,
+    val backdrop_path: String?,
     val genre_ids: List<Int>,
     @PrimaryKey val id: Int,
     val original_language: String,

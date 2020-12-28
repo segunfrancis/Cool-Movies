@@ -1,4 +1,4 @@
-package com.project.segunfrancis.coolmovies.ui.all.adapter
+package com.project.segunfrancis.coolmovies.ui.top_rated.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import com.project.segunfrancis.coolmovies.ui.model.Result

@@ -16,7 +16,7 @@ class HomeFragment : Fragment() {
        override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentHomeBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -32,7 +32,7 @@ class HomeFragment : Fragment() {
                 override fun handleOnBackPressed() {
                     val currentItem = binding.viewPager.currentItem
                     if (currentItem != 0) {
-                        binding.viewPager.setCurrentItem(currentItem -1, true)
+                        binding.viewPager.setCurrentItem(0, true)
                     } else {
                         requireActivity().finish()
                     }
