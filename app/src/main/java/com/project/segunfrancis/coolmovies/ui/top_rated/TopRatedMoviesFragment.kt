@@ -11,7 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
-import com.project.segunfrancis.coolmovies.databinding.AllMoviesFragmentBinding
+import com.project.segunfrancis.coolmovies.databinding.TopRatedMoviesFragmentBinding
 import com.project.segunfrancis.coolmovies.ui.top_rated.adapter.MovieAdapter
 import com.project.segunfrancis.coolmovies.ui.top_rated.adapter.MovieLoadStateAdapter
 import com.project.segunfrancis.coolmovies.ui.home.HomeFragmentDirections
@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class TopRatedMoviesFragment : Fragment() {
 
-    private var _binding: AllMoviesFragmentBinding? = null
+    private var _binding: TopRatedMoviesFragmentBinding? = null
     private val binding get() = _binding!!
     private val viewModel: TopRatedMoviesViewModel by viewModels()
 
@@ -32,7 +32,7 @@ class TopRatedMoviesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = AllMoviesFragmentBinding.inflate(layoutInflater)
+        _binding = TopRatedMoviesFragmentBinding.inflate(layoutInflater)
         binding.loadingIndicator.setImageDrawable(loadingIndicator(requireContext()))
         return binding.root
     }
@@ -63,7 +63,7 @@ class TopRatedMoviesFragment : Fragment() {
                 ?: loadState.source.refresh as? LoadState.Error
                 ?: loadState.refresh as? LoadState.Error
             errorState?.let {
-                binding.errorText.text = it.error.errorMessage(requireContext())
+                binding.errorText.text = getString(it.error.errorMessage())
             }
         }
 

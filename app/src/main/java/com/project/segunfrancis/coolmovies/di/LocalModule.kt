@@ -30,7 +30,9 @@ object LocalModule {
             context.applicationContext,
             MovieDatabase::class.java,
             DATABASE_NAME
-        ).build()
+        )
+            .fallbackToDestructiveMigration()
+            .build()
     }
 
     @Provides

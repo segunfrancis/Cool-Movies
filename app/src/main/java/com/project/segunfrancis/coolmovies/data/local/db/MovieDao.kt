@@ -21,7 +21,7 @@ interface MovieDao {
     @Query("DELETE FROM movie_table WHERE :id is id")
     suspend fun removeFavorite(id: Int)
 
-    @Query("SELECT * FROM movie_table")
+    @Query("SELECT * FROM movie_table ORDER BY original_title ASC")
     fun getAllFavorites(): Flow<List<ResultLocal>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

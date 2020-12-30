@@ -6,11 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.like.LikeButton
 import com.like.OnLikeListener
+import com.project.segunfrancis.coolmovies.R
 import com.project.segunfrancis.coolmovies.databinding.FragmentMovieDetailsBinding
 import com.project.segunfrancis.coolmovies.ui.MainViewModel
 import com.project.segunfrancis.coolmovies.ui.favorite.FavoriteViewModel
@@ -74,8 +76,11 @@ class MovieDetailsFragment : Fragment() {
                     binding.genres.text = tempList.toString().removeSurrounding("[", "]")
                 }
 
-                is State.Loading -> {}
-                is State.Error -> { Timber.e(state.error) }
+                is State.Loading -> {
+                }
+                is State.Error -> {
+                    Timber.e(state.error)
+                }
             }
         }
 
@@ -87,6 +92,24 @@ class MovieDetailsFragment : Fragment() {
             plotTextView.text = result.overview
             releaseDateText.text = result.release_date
             progressBar.apply {
+                when {
+                    result.vote_average < 6.0 -> {
+                        highlightView.color =
+                            ContextCompat.getColor(requireContext(), R.color.custom_yellow)
+                    }
+                    result.vote_average < 7.0 -> {
+                        highlightView.color =
+                            ContextCompat.getColor(requireContext(), R.color.custom_green100)
+                    }
+                    result.vote_average < 8.0 -> {
+                        highlightView.color =
+                            ContextCompat.getColor(requireContext(), R.color.custom_green)
+                    }
+                    result.vote_average < 10.0 -> {
+                        highlightView.color =
+                            ContextCompat.getColor(requireContext(), R.color.custom_green200)
+                    }
+                }
                 progress = result.vote_average.toFloat()
                 labelText = result.vote_average.toString()
             }

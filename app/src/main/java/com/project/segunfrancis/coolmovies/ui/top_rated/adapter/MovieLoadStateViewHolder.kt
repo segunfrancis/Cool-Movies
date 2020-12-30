@@ -22,7 +22,7 @@ class MovieLoadStateViewHolder(
 
     fun bind(loadState: LoadState) = with(binding) {
         if (loadState is LoadState.Error) {
-            errorMsg.text = loadState.error.errorMessage(root.context)
+            errorMsg.text = root.context.getString(loadState.error.errorMessage())
         }
         progressBar.isVisible = loadState is LoadState.Loading
         retryButton.isVisible = loadState !is LoadState.Loading

@@ -135,7 +135,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Genre"
+            android:text="@string/text_genre"
             app:layout_constraintEnd_toEndOf="@id/progress_bar"
             app:layout_constraintStart_toStartOf="@id/progress_bar"
             app:layout_constraintTop_toBottomOf="@id/progress_bar" />

@@ -46,10 +46,10 @@ fun View.snack(message: String, warning: Boolean) {
     snackbar.show()
 }
 
-fun Throwable.errorMessage(context: Context): String {
+fun Throwable.errorMessage(): Int {
     return when(this) {
-        is UnknownHostException -> context.resources.getString(R.string.text_error_unknown_host_exception)
-        is SocketTimeoutException -> context.resources.getString(R.string.text_error_socket_timeout_exception)
-        else -> context.resources.getString(R.string.text_error_general)
+        is UnknownHostException -> R.string.text_error_unknown_host_exception
+        is SocketTimeoutException -> R.string.text_error_socket_timeout_exception
+        else -> R.string.text_error_general
     }
 }

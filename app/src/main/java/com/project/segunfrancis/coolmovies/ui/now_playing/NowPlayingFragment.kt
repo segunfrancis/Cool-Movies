@@ -63,7 +63,7 @@ class NowPlayingFragment : Fragment() {
                 ?: loadState.source.refresh as? LoadState.Error
                 ?: loadState.refresh as? LoadState.Error
             errorState?.let {
-                binding.errorText.text = it.error.errorMessage(requireContext())
+                binding.errorText.text = getString(it.error.errorMessage())
             }
         }
 
@@ -74,9 +74,4 @@ class NowPlayingFragment : Fragment() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-
-        _binding = null
-    }
 }
